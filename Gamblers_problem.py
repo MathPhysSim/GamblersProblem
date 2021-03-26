@@ -267,16 +267,17 @@ class Gambler(gym.Env):
 
         fig.suptitle(label)
         fig.tight_layout()
+        self.clear_plot()
         return fig
 
-    def init_func(self):
-        """needed for the animation"""
-        self.ax1.clear()
-        self.ax2.clear()
-        self.ax3.clear()
-        # pass
-        # for ax in self.fig.get_axes():
-        #     ax.clear()
+    # def init_func(self):
+    #     """needed for the animation"""
+    #     self.ax1.clear()
+    #     self.ax2.clear()
+    #     self.ax3.clear()
+    #     # pass
+    #     # for ax in self.fig.get_axes():
+    #     #     ax.clear()
 
     def plot_current_policy(self, policy_array, Q_array, state_value, label=None):
         fig = self.fig
@@ -315,12 +316,14 @@ class Gambler(gym.Env):
 
         # self.ims.append([])
         # fig.show()
-
-    def update_plot(self, values, iteration):
+    def clear_plot(self):
         self.ax1.clear()
         self.ax2.clear()
         self.ax3.clear()
         self.cax.clear()
+
+    def update_plot(self, values, iteration):
+        self.clear_plot()
         state_value, Q_array, policy_array = values
         self.plot_current_policy(policy_array=policy_array,
                                  Q_array=Q_array,
@@ -344,16 +347,16 @@ if __name__ == '__main__':
                     comment='Movie support!')
     writer = FFMpegWriter(fps=1, metadata=metadata)
 
-    with writer.saving(fig, f'images/Gambler PI head_prob {head_prob} target {target}.mp4', 250):
+    with writer.saving(fig, f'images/Gambler PI head_prob {head_prob} target {target}.mp4', 100):
         for i, values in enumerate(gambler.pi_history):
             gambler.update_plot(values, i)
-            # fig.show()
+            fig.show()
             writer.grab_frame()
 
     fig = gambler.init_plot()
     gambler.value_iteration()
 
-    with writer.saving(fig, f'images/Gambler VI head_prob {head_prob} target {target}.mp4', 250):
+    with writer.saving(fig, f'images/Gambler VI head_prob {head_prob} target {target}.mp4', 100):
         for i, values in enumerate(gambler.vi_history):
             gambler.update_plot(values, i)
             # fig.show()
