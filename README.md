@@ -1,5 +1,5 @@
 
-# Gamblers Problem (Example 4.3 - Sutton and Barto - 2020)
+# Gambler's Problem (Example 4.3 - Sutton and Barto - 2020, p.84)
 Value iteration and policy iteration show some (numerical) differences during convergence (surprise):
 ## Value iteration
 ![Watch the video](https://user-images.githubusercontent.com/22523245/112661151-7e2ad500-8e56-11eb-854d-ea78095181ec.mp4)
